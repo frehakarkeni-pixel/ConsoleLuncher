@@ -1,3 +1,4 @@
+
 pipeline {
     agent any
 
@@ -29,5 +30,14 @@ pipeline {
                 sh 'docker build -t java-web-app:latest .'
             }
         }
+
+        stage('Deploy Docker Swarm') {
+            steps {
+                echo 'Deploiement de l application avec Docker Swarm'
+                sh 'docker service update --image java-web-app:latest java-web-app'
+            }
+        }
     }
 }
+
+
